@@ -1,9 +1,41 @@
-﻿namespace CSharpLearn
+﻿using System.Drawing;
+
+namespace CSharpLearn
 {
+
     internal class Program
     {
+        static int size = 10;
+        static int[,] data2 = new int[10, 10];
+
+        static void Initialize()
+        {
+                
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    data2[i, j] = i * 10 + j + 1;
+                }
+            }
+        }
+        
+        static void Print()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    Console.Write($" {data2[i, j]} \t");
+                }
+                Console.WriteLine($" ");
+            }
+        }        
         static void Main(string[] args)
         {
+
+            void fnIni() { 
+            }
             Console.WriteLine("Hello, World!");
             Console.WriteLine("Git Test");
             Console.WriteLine("캠프에서 추가");
@@ -83,7 +115,9 @@
                 Console.WriteLine($" ");
             }
 
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("------------------static를 이용한 변수 선언 및 함수 만들기--------------------");
+            Initialize();
+            Print();
         }
     }
 }
