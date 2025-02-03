@@ -50,25 +50,39 @@
                 }
                 Console.WriteLine("");
             }
-            Console.WriteLine("---------------2차원 배열-----------------------");
-            int[,] map = new int[5,5];
-            int size = 10;
-            for (int i = 0; i < 5; i++)
+            Console.WriteLine("---------------배열-----------------------");
+            size = 10;
+            int[] data = new int[size];
+            for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < 5; j++)
+                    data[i] = i + 1;
+            }
+            for (int i = 0; i < size; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            String s = "Hello World!!!";
+
+
+            Console.WriteLine("-------------- 2차원 배열------------------------");
+            int[,] data2 = new int[10, 10];
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < 10; j++)
                 {
-                    map[j, i] = i;
-                    //if (i >= j)
-                    //{
-                    //    Console.Write("*");
-                    //}
-                    //else
-                    //{
-                    //    Console.Write("#");
-                    //}
+                    data2[i, j] = i * 10 + j + 1;
+                }
+            }
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write($" {data2[i, j]} \t");
                 }
                 Console.WriteLine($" ");
             }
+
             Console.WriteLine("--------------------------------------");
         }
     }
