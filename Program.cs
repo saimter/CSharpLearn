@@ -65,6 +65,7 @@
             String s = "Hello World!!!";
 
             Console.WriteLine("-------------- 2차원 배열------------------------");
+
             int[,] data2 = new int[10,10];
             for (int i = 0; i < size; i++)
             {
