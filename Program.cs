@@ -6,6 +6,7 @@
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine("Git Test");
+            Console.WriteLine("캠프에서 추가");
         }
     }
 }
