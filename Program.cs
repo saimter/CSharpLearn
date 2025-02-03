@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CSharpLearn
 {
-    
-
     public class Player
     {
         public string Eat(string food)
@@ -19,11 +18,10 @@ namespace CSharpLearn
     internal class Program
     {
 
-
         static int size = 10;
         static int[,] data2 = new int[10, 10];
 
-        static int Plus(int Number,int Number2)
+        static int Plus(int Number, int Number2)
         {
             return Number + Number2;
         }
@@ -34,7 +32,7 @@ namespace CSharpLearn
 
         static void Initialize()
         {
-                
+
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -43,7 +41,7 @@ namespace CSharpLearn
                 }
             }
         }
-        
+
         static void Print()
         {
             for (int i = 0; i < size; i++)
@@ -55,8 +53,46 @@ namespace CSharpLearn
                 Console.WriteLine($" ");
             }
         }
+
+
+        #region  로그라이크류 게임 변수
+
+        static char wall = '*';
+        static char floor = ' ';
+        static int playerX = 1;
+        static int playerY = 1;
+
+        static int[,] map =               {
+                    { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 4, 0, 1 },
+                    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                    { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+            };
+        static ConsoleKeyInfo keyInfo;
+
+        static bool IsRunning = true;
+        #endregion
+
         static void Main(string[] args)
         {
+
+            while (IsRunning)
+            {
+                Input();
+                Update();
+                Render();
+            }
+
+            Console.Clear();
+            Console.WriteLine("Game over");
+
+            #region 일반 함수
             int num1 = 7;
             int num2 = 6;
             Console.WriteLine($"곱하기 결과 {num1} * {num2} = {Multiply(num1, num2)}");
@@ -125,7 +161,7 @@ namespace CSharpLearn
             {
                 Console.WriteLine(data[i]);
             }
-            String s = "Hello World!!!";
+            string s = "Hello World!!!";
 
 
             Console.WriteLine("-------------- 2차원 배열------------------------");
@@ -149,7 +185,68 @@ namespace CSharpLearn
             Console.WriteLine("------------------static를 이용한 변수 선언 및 함수 만들기--------------------");
             Initialize();
             Print();
+            #endregion
         }
+
+        private static void Render()
+        {
+            Console.Clear();
+
+            for (int y = 0; y < 10; y++)
+            {
+                for (int x = 0; x < 10; x++)
+                {
+                    if (x == playerX && y == playerY)
+                    {
+                        Console.Write('P');
+                    }
+                    else if (map[y, x] == 1)
+                    {
+                        Console.Write(wall);
+                    }
+                    else if (map[y, x] == 0)
+                    {
+                        Console.Write(floor);
+                    }
+                    else if (map[y, x] == 4)
+                    {
+                        Console.Write('M');
+                    }
+                }
+                Console.Write('\n');
+            }
+        }
+
+        private static void Update()
+        {
+            if (keyInfo.Key == ConsoleKey.W)
+            {
+                playerY--;
+            }
+            else if (keyInfo.Key == ConsoleKey.S)
+            {
+                playerY++;
+            }
+            else if (keyInfo.Key == ConsoleKey.A)
+            {
+                playerX--;
+            }
+            else if (keyInfo.Key == ConsoleKey.D)
+            {
+                playerX++;
+            }
+            else if (keyInfo.Key == ConsoleKey.Escape)
+            {
+                IsRunning = false;
+            }
+        }
+
+        private static void Input()
+        {
+            keyInfo = Console.ReadKey();
+        }
+
+
     }
 }
 
