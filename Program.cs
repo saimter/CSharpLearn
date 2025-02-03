@@ -2,11 +2,35 @@
 
 namespace CSharpLearn
 {
+    
+
+    public class Player
+    {
+        public string Eat(string food)
+        {
+            return $"플레이어가 {food}를 먹었습니다.";
+        }
+        public int Multiply(int number1, int number2)
+        {
+            return number1 * number2;
+        }
+    }
 
     internal class Program
     {
+
+
         static int size = 10;
         static int[,] data2 = new int[10, 10];
+
+        static int Plus(int Number,int Number2)
+        {
+            return Number + Number2;
+        }
+        static int Multiply(int number1, int number2)
+        {
+            return number1 * number2;
+        }
 
         static void Initialize()
         {
@@ -30,12 +54,19 @@ namespace CSharpLearn
                 }
                 Console.WriteLine($" ");
             }
-        }        
+        }
         static void Main(string[] args)
         {
+            int num1 = 7;
+            int num2 = 6;
+            Console.WriteLine($"곱하기 결과 {num1} * {num2} = {Multiply(num1, num2)}");
 
-            void fnIni() { 
-            }
+            Player player = new Player();
+
+            //Console.WriteLine("클래스를 이용한 곱셈 : {player.Multiply(3, 4)}");
+            Console.WriteLine($"클래스 곱하기 결과 {num1} * {num2} = {player.Multiply(num1, num2)}");
+            Console.WriteLine(player.Eat("사과"));
+            Console.WriteLine($"{Plus(2,3)}");
             Console.WriteLine("Hello, World!");
             Console.WriteLine("Git Test");
             Console.WriteLine("캠프에서 추가");
