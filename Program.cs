@@ -17,7 +17,6 @@ namespace CSharpLearn
 
     internal class Program
     {
-
         static int size = 10;
         static int[,] data2 = new int[10, 10];
 
@@ -76,116 +75,187 @@ namespace CSharpLearn
             };
         static ConsoleKeyInfo keyInfo;
 
+
+        static void fnLottery()
+        {
+
+            //int[] array = { 1, 2, 3, 4, 5 };
+            //int elementToRemove = 3;
+            //List<int> list = new List<int>(array);
+            //list.Remove(elementToRemove);
+            //array = list.ToArray();
+            //for (int i = 0; i < array.Length; i++) {
+            //    fnMsg(array[i].ToString());
+            //}
+            int size = 52;
+            int cntNum = 8;
+            int cntResultNum = 0;
+
+            int[] arrLottery = new int[size];
+            int[] arrResult = new int[8];
+
+            for (int i = 0; i < size; i++)
+            {
+                arrLottery[i] = i + 1;
+            }
+            Random rand = new Random();
+            //Console.WriteLine("-------------------------------");
+            while (cntNum > cntResultNum)
+            {
+                bool isExists = false;
+
+                int sizeArr = arrLottery.Length;
+                int rd = rand.Next(0, sizeArr);
+
+                for (int i = 0; i < cntResultNum; i++)
+                {
+                    if (rd == arrResult[i])
+                    {
+                        isExists = true;
+                    }
+                    //else
+                    //{
+                    //    Console.WriteLine($"{rd} == {arrResult[i]}");
+                    //}
+                }
+                if (!isExists)
+                {
+                    arrResult[cntResultNum] = rd;
+                    cntResultNum++;
+                }
+            }
+            //for (int i = 0; i < 8; ++i)
+            //{
+            //    bool isExists = true;
+            //    int sizeArr = arrLottery.Length;
+            //    int rd = rand.Next(0, sizeArr);
+            //    //arrLottery.Remove(rd);
+            //    //Console.WriteLine($"{rd},");
+
+            //    if (!isExists) { }
+            //    arrResult[i] = rd;
+
+
+            //}
+
+            for (int i = 0; i < arrResult.Length; ++i)
+            {
+                Console.Write(arrResult[i].ToString() + ",");
+            }
+        }
+
         static bool IsRunning = true;
         #endregion
 
         static void Main(string[] args)
         {
+            fnLottery();
+            
+            
+            //while (IsRunning)
+            //{
+            //    Input();
+            //    Update();
+            //    Render();
+            //}
 
-            while (IsRunning)
-            {
-                Input();
-                Update();
-                Render();
-            }
+            //Console.Clear();
+            //Console.WriteLine("Game over");
 
-            Console.Clear();
-            Console.WriteLine("Game over");
+            //#region 일반 함수
+            //int num1 = 7;
+            //int num2 = 6;
+            //Console.WriteLine($"곱하기 결과 {num1} * {num2} = {Multiply(num1, num2)}");
 
-            #region 일반 함수
-            int num1 = 7;
-            int num2 = 6;
-            Console.WriteLine($"곱하기 결과 {num1} * {num2} = {Multiply(num1, num2)}");
+            //Player player = new Player();
 
-            Player player = new Player();
+            ////Console.WriteLine("클래스를 이용한 곱셈 : {player.Multiply(3, 4)}");
+            //Console.WriteLine($"클래스 곱하기 결과 {num1} * {num2} = {player.Multiply(num1, num2)}");
+            //Console.WriteLine(player.Eat("사과"));
+            //Console.WriteLine($"{Plus(2,3)}");
+            //Console.WriteLine("Hello, World!");
+            //Console.WriteLine("Git Test");
+            //Console.WriteLine("캠프에서 추가");
 
-            //Console.WriteLine("클래스를 이용한 곱셈 : {player.Multiply(3, 4)}");
-            Console.WriteLine($"클래스 곱하기 결과 {num1} * {num2} = {player.Multiply(num1, num2)}");
-            Console.WriteLine(player.Eat("사과"));
-            Console.WriteLine($"{Plus(2,3)}");
-            Console.WriteLine("Hello, World!");
-            Console.WriteLine("Git Test");
-            Console.WriteLine("캠프에서 추가");
+            //Console.WriteLine("------------------별 그리기--------------------");
+            //for (int i = 0; i < 5; i++) 
+            //{
+            //    for (int j = 0; j < 5; j++)
+            //    {
+            //        Console.Write("*");
+            //    }
+            //    Console.WriteLine("");
+            //}
 
-            Console.WriteLine("------------------별 그리기--------------------");
-            for (int i = 0; i < 5; i++) 
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine("");
-            }
-
-            Console.WriteLine("--------------------별과 샾 그리기------------------");
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if( i >= j) {
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        Console.Write("#");
-                    }
-                }
-                Console.WriteLine("");
-            }
-            Console.WriteLine("--------------------별과 샾 그리기------------------");
-            int size = 10;
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = size; j >= 0; j--)
-                {
-                    if (i >= j)
-                    {
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
-                }
-                Console.WriteLine("");
-            }
-            Console.WriteLine("---------------배열-----------------------");
-            size = 10;
-            int[] data = new int[size];
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                    data[i] = i + 1;
-            }
-            for (int i = 0; i < size; i++)
-            {
-                Console.WriteLine(data[i]);
-            }
-            string s = "Hello World!!!";
+            //Console.WriteLine("--------------------별과 샾 그리기------------------");
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    for (int j = 0; j < 5; j++)
+            //    {
+            //        if( i >= j) {
+            //            Console.Write("*");
+            //        }
+            //        else
+            //        {
+            //            Console.Write("#");
+            //        }
+            //    }
+            //    Console.WriteLine("");
+            //}
+            //Console.WriteLine("--------------------별과 샾 그리기------------------");
+            //int size = 10;
+            //for (int i = 0; i < size; i++)
+            //{
+            //    for (int j = size; j >= 0; j--)
+            //    {
+            //        if (i >= j)
+            //        {
+            //            Console.Write("*");
+            //        }
+            //        else
+            //        {
+            //            Console.Write(" ");
+            //        }
+            //    }
+            //    Console.WriteLine("");
+            //}
+            //Console.WriteLine("---------------배열-----------------------");
+            //size = 10;
+            //int[] data = new int[size];
+            //for (int i = 0; i < size; i++)
+            //{
+            //    for (int j = 0; j < 5; j++)
+            //        data[i] = i + 1;
+            //}
+            //for (int i = 0; i < size; i++)
+            //{
+            //    Console.WriteLine(data[i]);
+            //}
+            //string s = "Hello World!!!";
 
 
-            Console.WriteLine("-------------- 2차원 배열------------------------");
-            int[,] data2 = new int[10, 10];
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    data2[i, j] = i * 10 + j + 1;
-                }
-            }
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    Console.Write($" {data2[i, j]} \t");
-                }
-                Console.WriteLine($" ");
-            }
+            //Console.WriteLine("-------------- 2차원 배열------------------------");
+            //int[,] data2 = new int[10, 10];
+            //for (int i = 0; i < size; i++)
+            //{
+            //    for (int j = 0; j < 10; j++)
+            //    {
+            //        data2[i, j] = i * 10 + j + 1;
+            //    }
+            //}
+            //for (int i = 0; i < size; i++)
+            //{
+            //    for (int j = 0; j < 10; j++)
+            //    {
+            //        Console.Write($" {data2[i, j]} \t");
+            //    }
+            //    Console.WriteLine($" ");
+            //}
 
-            Console.WriteLine("------------------static를 이용한 변수 선언 및 함수 만들기--------------------");
-            Initialize();
-            Print();
-            #endregion
+            //Console.WriteLine("------------------static를 이용한 변수 선언 및 함수 만들기--------------------");
+            //Initialize();
+            //Print();
+            //#endregion
         }
 
         private static void Render()
@@ -246,7 +316,10 @@ namespace CSharpLearn
             keyInfo = Console.ReadKey();
         }
 
-
+        static void fnMsg(string __msg)
+        {
+            Console.WriteLine(__msg);
+        }
     }
 }
 
