@@ -20,6 +20,49 @@ namespace CSharpLearn
         static int size = 10;
         static int[,] data2 = new int[10, 10];
 
+        static void fnLottery()
+        {
+
+            int size = 52;
+            int cntNum = 8;
+            int cntResultNum = 0;
+
+            int[] arrLottery = new int[size];
+            int[] arrResult = new int[8];
+
+            for (int i = 0; i < size; i++)
+            {
+                arrLottery[i] = i + 1;
+            }
+            Random rand = new Random();
+
+            while (cntNum > cntResultNum)
+            {
+                bool isExists = false;
+
+                int sizeArr = arrLottery.Length;
+                int rd = rand.Next(0, sizeArr);
+
+                for (int i = 0; i < cntResultNum; i++)
+                {
+                    if (rd == arrResult[i])
+                    {
+                        isExists = true;
+                    }
+                }
+                if (!isExists)
+                {
+                    arrResult[cntResultNum] = rd;
+                    cntResultNum++;
+                }
+            }
+            
+            for (int i = 0; i < arrResult.Length; ++i)
+            {
+                Console.Write(arrResult[i].ToString() + ",");
+            }
+        }
+
         static int Plus(int Number, int Number2)
         {
             return Number + Number2;
@@ -76,74 +119,7 @@ namespace CSharpLearn
         static ConsoleKeyInfo keyInfo;
 
 
-        static void fnLottery()
-        {
-
-            //int[] array = { 1, 2, 3, 4, 5 };
-            //int elementToRemove = 3;
-            //List<int> list = new List<int>(array);
-            //list.Remove(elementToRemove);
-            //array = list.ToArray();
-            //for (int i = 0; i < array.Length; i++) {
-            //    fnMsg(array[i].ToString());
-            //}
-            int size = 52;
-            int cntNum = 8;
-            int cntResultNum = 0;
-
-            int[] arrLottery = new int[size];
-            int[] arrResult = new int[8];
-
-            for (int i = 0; i < size; i++)
-            {
-                arrLottery[i] = i + 1;
-            }
-            Random rand = new Random();
-            //Console.WriteLine("-------------------------------");
-            while (cntNum > cntResultNum)
-            {
-                bool isExists = false;
-
-                int sizeArr = arrLottery.Length;
-                int rd = rand.Next(0, sizeArr);
-
-                for (int i = 0; i < cntResultNum; i++)
-                {
-                    if (rd == arrResult[i])
-                    {
-                        isExists = true;
-                    }
-                    //else
-                    //{
-                    //    Console.WriteLine($"{rd} == {arrResult[i]}");
-                    //}
-                }
-                if (!isExists)
-                {
-                    arrResult[cntResultNum] = rd;
-                    cntResultNum++;
-                }
-            }
-            //for (int i = 0; i < 8; ++i)
-            //{
-            //    bool isExists = true;
-            //    int sizeArr = arrLottery.Length;
-            //    int rd = rand.Next(0, sizeArr);
-            //    //arrLottery.Remove(rd);
-            //    //Console.WriteLine($"{rd},");
-
-            //    if (!isExists) { }
-            //    arrResult[i] = rd;
-
-
-            //}
-
-            for (int i = 0; i < arrResult.Length; ++i)
-            {
-                Console.Write(arrResult[i].ToString() + ",");
-            }
-        }
-
+        
         static bool IsRunning = true;
         #endregion
 
