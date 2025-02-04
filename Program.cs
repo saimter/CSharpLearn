@@ -14,12 +14,56 @@ namespace CSharpLearn
             return number1 * number2;
         }
     }
-
+    //  1 ~ 13      다이아
+    //  14 ~ 26     하트
+    //  27 ~ 39     클로버
+    //  40 ~ 52     스페이드
     internal class Program
     {
-        static int size = 10;
-        static int[,] data2 = new int[10, 10];
+        static void FnLotteryTypecast(int __num)
+        {
+            int cardSort = -1;
+            int cardNum = -1;
+            cardSort = (int)((__num - 1) / 13);
+            cardNum = (__num - 1) % 13;
 
+            string cardSortResult = "";
+            string cardNumResult = "";
+            switch (cardSort)
+            {
+                case 0:
+                    cardSortResult = "◆";
+                    break;
+                case 1:
+                    cardSortResult = "♥";
+                    break;
+                case 2:
+                    cardSortResult = "♣";
+                    break;
+                case 3:
+                    cardSortResult = "♠";
+                    break;
+            }
+            switch (cardNum)
+            {
+                case 0:
+                    cardNumResult = "A";
+                    break;
+                case 10:
+                    cardNumResult = "J";
+                    break;
+                case 11:
+                    cardNumResult = "Q";
+                    break;
+                case 12:
+                    cardNumResult = "K";
+                    break;
+                default:
+                    cardNumResult = (cardNum + 1).ToString();
+                    break;
+            }
+            Console.WriteLine($"{__num} : {cardSortResult}{cardNumResult}");
+        }
         static void fnLottery()
         {
 
@@ -28,7 +72,8 @@ namespace CSharpLearn
             int cntResultNum = 0;
 
             int[] arrLottery = new int[size];
-            int[] arrResult = new int[8];
+            int[] arrResult = new int[cntNum];
+            string[] arrResultS = new string[cntNum];
 
             for (int i = 0; i < size; i++)
             {
@@ -59,9 +104,12 @@ namespace CSharpLearn
             
             for (int i = 0; i < arrResult.Length; ++i)
             {
-                Console.Write(arrResult[i].ToString() + ",");
+                //Console.Write(arrResult[i].ToString() + ",");
+                FnLotteryTypecast(arrResult[i]);
             }
         }
+        static int size = 10;
+        static int[,] data2 = new int[10, 10];
 
         static int Plus(int Number, int Number2)
         {
