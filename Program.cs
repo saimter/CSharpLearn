@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Microsoft.VisualBasic;
+using System.Drawing;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CSharpLearn
@@ -14,12 +15,115 @@ namespace CSharpLearn
             return number1 * number2;
         }
     }
-    //  1 ~ 13      다이아
-    //  14 ~ 26     하트
+    //  1 ~ 13      하트
+    //  14 ~ 26     다이아
     //  27 ~ 39     클로버
     //  40 ~ 52     스페이드
     internal class Program
     {
+
+        enum CardType
+        {
+            None = -1,
+            Heart = 0,
+            Diamond = 1,
+            Clover = 2,
+            Spade = 3,
+        }
+        static void Initialize(int[] deck)
+        {
+            for (int i = 0; i < deck.Length; i++)
+            {
+                deck[i] = i + 1;
+            }
+        }
+        static void Shuffle(int[] deck)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < deck.Length * 10; ++i)
+            {
+                int firstCardIndex = random.Next(0, deck.Length);
+                int secondCardIndex = random.Next(0, deck.Length);
+
+                fnMsg($"{firstCardIndex},{secondCardIndex}");
+
+                int temp = deck[firstCardIndex];
+                deck[firstCardIndex] = deck[secondCardIndex];
+                deck[secondCardIndex] = temp;
+            }
+        }
+        static void PrintCard()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    Console.Write($" {data2[i, j]} \t");
+                }
+                Console.WriteLine($" ");
+            }
+        }
+
+        static CardType CheckCardType(int cardNumber)
+        {
+            int valueType = (cardNumber - 1) / 13;
+
+            //CardType returnCardType = (CardType)valueType;
+            //switch((CardType)valueType)
+            //{
+            //    case CardType.Heart:
+            //        returnCardType = CardType.Heart;
+            //        break;
+            //    case CardType.Diamond:
+            //        returnCardType = CardType.Diamond;
+            //        break;
+            //    case CardType.Spade:
+            //        returnCardType = CardType.Spade;
+            //        break;
+            //    case CardType.Clover:
+            //        returnCardType = CardType.Clover;
+            //        break;
+            //    default:
+            //        returnCardType = CardType.None;
+            //        break;
+            //}
+
+            return (CardType)valueType;
+        }
+
+        static string CheckCardName(int cardNumber)
+        {
+            int cardValue = ((cardNumber - 1) % 13) + 1;
+            string cardName;
+            switch (cardValue)
+            {
+                case 1:
+                    cardName = "A";
+                    break;
+                case 11:
+                    cardName = "J";
+                    break;
+                case 12:
+                    cardName = "Q";
+                    break;
+                case 13:
+                    cardName = "K";
+                    break;
+                default:
+                    cardName = cardValue.ToString();
+                    break;
+            }
+
+            return cardName;
+        }
+        static void Print(int[] deck)
+        {
+            for (int i = 0; i < 8; ++i)
+            {
+                Console.WriteLine($"{CheckCardType(deck[i]).ToString()} {CheckCardName(deck[i])}");
+            }
+        }
         static void CardMakeTypecast(int __num)
         {
             int cardSort = -1;
@@ -30,15 +134,13 @@ namespace CSharpLearn
             string cardSortResult = "";
             string cardNumResult = "";
 
-
-
             switch (cardSort)
             {
                 case 0:
-                    cardSortResult = "◆";
+                    cardSortResult = "♥";
                     break;
                 case 1:
-                    cardSortResult = "♥";
+                    cardSortResult = "◆";
                     break;
                 case 2:
                     cardSortResult = "♣";
@@ -69,7 +171,6 @@ namespace CSharpLearn
         }
         static void CardMake()
         {
-
             int size = 52;
             int cntNum = 8;
             int cntResultNum = 0;
@@ -77,6 +178,7 @@ namespace CSharpLearn
             int[] arrLottery = new int[size];
             int[] arrResult = new int[cntNum];
             string[] arrResultS = new string[cntNum];
+
 
             for (int i = 0; i < size; i++)
             {
@@ -104,8 +206,8 @@ namespace CSharpLearn
                     cntResultNum++;
                 }
             }
-            fnMsg("01 ~ 13     다이아");
-            fnMsg("14 ~ 26     하트");
+            fnMsg("01 ~ 13     하트");
+            fnMsg("14 ~ 26     다이아");
             fnMsg("27 ~ 39     클로버");
             fnMsg("40 ~ 52     스페이드");
             fnMsg("----------------------------");
@@ -140,17 +242,7 @@ namespace CSharpLearn
             }
         }
 
-        static void Print()
-        {
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Console.Write($" {data2[i, j]} \t");
-                }
-                Console.WriteLine($" ");
-            }
-        }
+        
 
 
         #region  로그라이크류 게임 변수
@@ -181,7 +273,15 @@ namespace CSharpLearn
 
         static void Main(string[] args)
         {
-            CardMake();
+
+            int[] deck = new int[52];
+
+            Initialize(deck);
+            Shuffle(deck);
+            PrintCard();
+
+
+            //CardMake();
             
             
             //while (IsRunning)
