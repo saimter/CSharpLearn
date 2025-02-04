@@ -23,9 +23,9 @@ namespace CSharpLearn
         static void FnLotteryTypecast(int __num)
         {
             int cardSort = -1;
-            int cardNum = -1;
+            int cardInd = -1;
             cardSort = (int)((__num - 1) / 13);
-            cardNum = (__num - 1) % 13;
+            cardInd = (__num - 1) % 13;
 
             string cardSortResult = "";
             string cardNumResult = "";
@@ -44,7 +44,7 @@ namespace CSharpLearn
                     cardSortResult = "♠";
                     break;
             }
-            switch (cardNum)
+            switch (cardInd)
             {
                 case 0:
                     cardNumResult = "A";
@@ -59,10 +59,10 @@ namespace CSharpLearn
                     cardNumResult = "K";
                     break;
                 default:
-                    cardNumResult = (cardNum + 1).ToString();
+                    cardNumResult = (cardInd + 1).ToString();
                     break;
             }
-            Console.WriteLine($"{__num} : {cardSortResult}{cardNumResult}");
+            Console.WriteLine($"{__num} : {cardSortResult} {cardNumResult}");
         }
         static void fnLottery()
         {
@@ -86,7 +86,7 @@ namespace CSharpLearn
                 bool isExists = false;
 
                 int sizeArr = arrLottery.Length;
-                int rd = rand.Next(0, sizeArr);
+                int rd = rand.Next(1, sizeArr);
 
                 for (int i = 0; i < cntResultNum; i++)
                 {
