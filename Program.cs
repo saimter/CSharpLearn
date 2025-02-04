@@ -20,7 +20,7 @@ namespace CSharpLearn
     //  40 ~ 52     스페이드
     internal class Program
     {
-        static void FnLotteryTypecast(int __num)
+        static void CardMakeTypecast(int __num)
         {
             int cardSort = -1;
             int cardInd = -1;
@@ -29,6 +29,9 @@ namespace CSharpLearn
 
             string cardSortResult = "";
             string cardNumResult = "";
+
+
+
             switch (cardSort)
             {
                 case 0:
@@ -64,7 +67,7 @@ namespace CSharpLearn
             }
             Console.WriteLine($"{__num} : {cardSortResult} {cardNumResult}");
         }
-        static void fnLottery()
+        static void CardMake()
         {
 
             int size = 52;
@@ -101,11 +104,16 @@ namespace CSharpLearn
                     cntResultNum++;
                 }
             }
-            
+            fnMsg("01 ~ 13     다이아");
+            fnMsg("14 ~ 26     하트");
+            fnMsg("27 ~ 39     클로버");
+            fnMsg("40 ~ 52     스페이드");
+            fnMsg("----------------------------");
+
             for (int i = 0; i < arrResult.Length; ++i)
             {
                 //Console.Write(arrResult[i].ToString() + ",");
-                FnLotteryTypecast(arrResult[i]);
+                CardMakeTypecast(arrResult[i]);
             }
         }
         static int size = 10;
@@ -173,7 +181,7 @@ namespace CSharpLearn
 
         static void Main(string[] args)
         {
-            fnLottery();
+            CardMake();
             
             
             //while (IsRunning)
