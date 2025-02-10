@@ -22,21 +22,21 @@ namespace CSharpLearn
     internal class Program
     {
 
-        enum CardType
-        {
-            None = -1,
-            Heart = 0,
-            Diamond = 1,
-            Clover = 2,
-            Spade = 3,
-        }
         static void Initialize(int[] deck)
         {
+            //unsafe
+            //{
+            //    TypedReference tr1 = __makeref(deck);
+            //    IntPtr ptr1 = **(IntPtr**)(&tr1);
+            //    Console.WriteLine(ptr1);
+            //}
+
             for (int i = 0; i < deck.Length; i++)
             {
                 deck[i] = i + 1;
             }
         }
+
         static void Shuffle(int[] deck)
         {
             Random random = new Random();
@@ -46,22 +46,80 @@ namespace CSharpLearn
                 int firstCardIndex = random.Next(0, deck.Length);
                 int secondCardIndex = random.Next(0, deck.Length);
 
-                fnMsg($"{firstCardIndex},{secondCardIndex}");
-
                 int temp = deck[firstCardIndex];
                 deck[firstCardIndex] = deck[secondCardIndex];
                 deck[secondCardIndex] = temp;
             }
         }
-        static void PrintCard()
+
+        enum CardType
         {
-            for (int i = 0; i < size; i++)
+            None = -1,
+            Heart = 0,
+            Diamond = 1,
+            Clover = 2,
+            Spade = 3,
+        }
+
+        static int GetScore(int cardNumber)
+        {
+            int value = (((cardNumber - 1) % 13) + 1);
+            return value > 10 ? 10 : value;
+        }
+
+        static void PrintCardList(int[] deck)
+        {
+            //Computer
+            Console.WriteLine("Computer");
+            for (int i = 0; i < 3; ++i)
             {
-                for (int j = 0; j < size; j++)
-                {
-                    Console.Write($" {data2[i, j]} \t");
-                }
-                Console.WriteLine($" ");
+                Console.WriteLine($"{CheckCardType(deck[i]).ToString()} {CheckCardName(deck[i])}");
+            }
+            Console.WriteLine("-------------");
+
+            Console.WriteLine("Player");
+            for (int i = 3; i < 6; ++i)
+            {
+                Console.WriteLine($"{CheckCardType(deck[i]).ToString()} {CheckCardName(deck[i])}");
+            }
+            Console.WriteLine("-------------");
+        }
+
+        static void Print(int[] deck)
+        {
+            PrintCardList(deck);
+
+            int computerScore = GetScore(deck[0]) +
+                GetScore(deck[1]) + GetScore(deck[2]);
+            int playerScore = GetScore(deck[3]) + GetScore(deck[4])
+                + GetScore(deck[5]);
+
+            Console.WriteLine($"Computer score : {computerScore}, Player Score : {playerScore}");
+
+            if (playerScore >= 21 && computerScore < 21)
+            {
+                //Computer Win
+                Console.WriteLine("Computer Win");
+            }
+            else if (playerScore < 21 && computerScore >= 21)
+            {
+                //Player Win
+                Console.WriteLine("Player Win");
+            }
+            else if (playerScore >= 21 && computerScore >= 21)
+            {
+                //Player Win
+                Console.WriteLine("Player Win");
+            }
+            else if (computerScore <= playerScore)
+            {
+                //Player Win
+                Console.WriteLine("Player Win");
+            }
+            else // (computerScore > playerScore)
+            {
+                //Computer Win
+                Console.WriteLine("Computer Win");
             }
         }
 
@@ -94,6 +152,8 @@ namespace CSharpLearn
 
         static string CheckCardName(int cardNumber)
         {
+
+            //1 - 13
             int cardValue = ((cardNumber - 1) % 13) + 1;
             string cardName;
             switch (cardValue)
@@ -117,13 +177,10 @@ namespace CSharpLearn
 
             return cardName;
         }
-        static void Print(int[] deck)
-        {
-            for (int i = 0; i < 8; ++i)
-            {
-                Console.WriteLine($"{CheckCardType(deck[i]).ToString()} {CheckCardName(deck[i])}");
-            }
-        }
+
+
+
+        #region 자작
         static void CardMakeTypecast(int __num)
         {
             int cardSort = -1;
@@ -218,6 +275,8 @@ namespace CSharpLearn
                 CardMakeTypecast(arrResult[i]);
             }
         }
+        #endregion
+
         static int size = 10;
         static int[,] data2 = new int[10, 10];
 
@@ -271,19 +330,54 @@ namespace CSharpLearn
         static bool IsRunning = true;
         #endregion
 
-        static void Main(string[] args)
+
+        public class CPixcel
         {
 
-            int[] deck = new int[52];
+            public int x;
+            public int y;
+            public int R;
+            public int G;
+            public int B;
+            public CPixcel()
+            {
+                Console.WriteLine("생성자");
+            }
+            ~CPixcel()
+            {
+                Console.WriteLine("소멸자");
+            }
+        } 
 
-            Initialize(deck);
-            Shuffle(deck);
-            PrintCard();
+        static void Main(string[] args)
+        {
+            CPixcel[] arrCPixcels = new CPixcel[2];
 
+            CPixcel CPixcel = new CPixcel();
+            CPixcel.x = 0;
+            CPixcel.y = 1;
+            CPixcel.R = 165;
+            CPixcel.G = 55;
+            CPixcel.B = 128;
+            Console.WriteLine(CPixcel.R.ToString());
+
+            CPixcel CPixcel2 = new CPixcel();
+            CPixcel2.x = 0;
+            CPixcel2.y = 1;
+            CPixcel2.R = 265;
+            CPixcel2.G = 155;
+            CPixcel2.B = 228;
+            Console.WriteLine(CPixcel2.R.ToString());
+
+
+            //int[] deck = new int[52];
+            //Initialize(deck);
+            //Shuffle(deck);
+            //PrintCard();
 
             //CardMake();
-            
-            
+
+
             //while (IsRunning)
             //{
             //    Input();
